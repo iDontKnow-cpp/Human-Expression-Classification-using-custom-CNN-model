@@ -67,7 +67,7 @@ The GUI application is developed using the Qt framework and is currently tested 
 2. The image path is passed to the Python backend using `QProcess`.
 3. `model.py`:
    - Detects and preprocesses the face.
-   - Loads the CNN model (`facial_expression.h5`).
+   - Loads the CNN model (`custom1.h5`).
    - Runs the prediction.
 4. The predicted emotion is returned and displayed in the GUI.
 
