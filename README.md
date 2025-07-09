@@ -27,7 +27,7 @@ It uses a trained deep learning model to predict the emotion from a given facial
 - **Input Size**: 64x64 grayscale face image
 - **Language**: Python (for backend & model inference)
 - **Model File**:
-  - `facial_expression.h5` – trained Keras model file
+  - `custom1.h5` – trained Keras model file
 
 ---
 
