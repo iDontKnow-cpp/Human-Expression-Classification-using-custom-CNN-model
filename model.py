@@ -16,7 +16,7 @@ print("Args:", sys.argv)
 print("Python script started")
 
 def main(path):
-  model = tf.keras.models.load_model('facial_expression.h5')
+  model = tf.keras.models.load_model('custom1.h5')
   X_new = preprocessing(path)
 
   # Check if preprocessing was successful (face detected)
