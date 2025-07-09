@@ -95,7 +95,7 @@ To compile the main.cpp file, command: g++ -fPIC main.cpp -o qt_app pkg-config -
 1. Clone the repository.
 2. Ensure you're on a Linux system with Qt and Python installed.
 3. Open or build `main.cpp` using Qt Creator or CMake.
-4. Place `facial_expression.h5` and `model.py` in the same directory as the compiled executable.
+4. Place `custom1.h5` and `model.py` in the same directory as the compiled executable.
 5. Run the application.
 6. Select an image to classify its facial expression.
 
