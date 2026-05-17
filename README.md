@@ -2,111 +2,105 @@
 
 This repository contains a Facial Expression Recognition project built using a custom Convolutional Neural Network (CNN) in TensorFlow, paired with a C++ GUI frontend using the Qt framework.
 
----
-
-🔹 **Overview**
-
-This project classifies human facial expressions into one of seven emotion categories:
-
-- Angry  
-- Disgust  
-- Fear  
-- Happy  
-- Neutral  
-- Sad  
-- Surprise  
-
-It uses a trained deep learning model to predict the emotion from a given facial image. The application includes a GUI that allows users to select an image file, run the model, and display the result interactively.
+The application classifies human facial expressions into one of seven emotion categories: **Angry, Disgust, Fear, Happy, Neutral, Sad,** and **Surprise**. It provides an interactive GUI that allows users to easily select an image file, run the prediction model, and view the results.
 
 ---
 
-🔹 **Model Details**
+## 🔹 Prerequisites
 
-- **Architecture**: Custom Convolutional Neural Network (CNN)
-- **Accuracy**: ~75% on test set
-- **Input Size**: 64x64 grayscale face image
-- **Language**: Python (for backend & model inference)
-- **Model File**:
-  - `custom1.h5` – trained Keras model file
+### System Requirements
 
----
+* **Operating System:** Linux (The GUI application is developed using Qt and is currently tested on Linux systems).
 
-🔹 **Preprocessing Techniques**
+### Python (Backend)
 
-The following preprocessing steps are applied to the input image before prediction:
+Ensure Python 3.x is installed along with the following libraries:
 
-- Face detection using Haar Cascades (`haarcascade_frontalface_default.xml`)
-- Conversion to grayscale
-- Cropping and resizing the face region to 64x64
-- Normalization (handled internally by the model if applicable)
+* `tensorflow`
+* `opencv-python`
+* `numpy`
+* `splitfolders`
+* `matplotlib`
 
-If no face is detected in the image, the program returns an error message.
+### C++ & Qt (Frontend)
 
-This logic is implemented in `model.py`.
+The frontend utilizes the Qt5 framework (specifically `QApplication`, `QProcess`, `QLabel`, `QFileDialog`, and `QPixmap`). To install the necessary C++ Qt libraries on Ubuntu/Debian-based systems, run:
 
----
-
-🔹 **Application Frontend**
-- **Frontend Language**: C++
-- **Libraries Used**:
-  - `QApplication`
-  - `QProcess`
-  - `QLabel`
-  - `QFileDialog`
-  - `QPixmap`
-- **Executable**: Qt-based GUI application
-
----
-
-⚠️ **Note**:
-The GUI application is developed using the Qt framework and is currently tested on Linux systems.
----
-
-🔹 **How It Works:**
-1. User selects an image through the Qt GUI.
-2. The image path is passed to the Python backend using `QProcess`.
-3. `model.py`:
-   - Detects and preprocesses the face.
-   - Loads the CNN model (`custom1.h5`).
-   - Runs the prediction.
-4. The predicted emotion is returned and displayed in the GUI.
-
----
-
-🔹 **Requirements**
-
-**Python(Backend):**:
-- tensorflow
-- opencv-python
-- numpy
-- splitfolders
-- matplotlib
-
-**Frontend:**
-Frontend Language: C++
-Libraries Used:
-- QApplication
-- QProcess (used to call Python backend),
-Executable: qt_app (your will get this executable file after compiling the main.cpp),
-To download the C++ libraries, use this command in terminal: sudo apt install qtbase5-dev,
-To compile the main.cpp file, command:
 ```bash
- g++ -fPIC main.cpp -o qt_app pkg-config --cflags --libs Qt5Widgets
-``` 
+sudo apt install qtbase5-dev
 
-
-**Usage:**
-1. Clone the repository.
-2. Ensure you're on a Linux system with Qt and Python installed.
-3. Open or build `main.cpp` using Qt Creator or CMake.
-4. Place `custom1.h5` and `model.py` in the same directory as the compiled executable.
-5. Run the application.
-6. Select an image to classify its facial expression.
+```
 
 ---
 
-🔹 **Notes**
-- Only one face is processed per image (currently selects the first detected face).
-- The prediction is most accurate when the face is clearly visible and front-facing.
-- To improve real-world performance, the model can be enhanced with data augmentation and real-time webcam input.
+## 🔹 Installation & Usage
 
+**1. Clone the repository:**
+Download the project files to your local Linux machine.
+
+**2. Compile the C++ Frontend:**
+Navigate to the repository directory in your terminal and compile `main.cpp` into an executable named `qt_app` using the following command:
+
+```bash
+g++ -fPIC main.cpp -o qt_app $(pkg-config --cflags --libs Qt5Widgets)
+
+```
+
+*(Alternatively, you can build `main.cpp` using Qt Creator or CMake).*
+
+**3. Set up the directory:**
+Ensure that your trained Keras model (`custom1.h5`) and the Python backend script (`model.py`) are placed in the exact same directory as your newly compiled `qt_app` executable.
+
+**4. Run the application:**
+Execute the compiled application:
+
+```bash
+./qt_app
+
+```
+
+Use the GUI to select an image file and classify the facial expression!
+
+---
+
+## 🔹 How It Works
+
+1. **Image Selection:** The user selects an image file through the C++ Qt GUI.
+2. **Process Communication:** The frontend passes the absolute image path to the Python backend utilizing `QProcess`.
+3. **Backend Execution (`model.py`):**
+* Detects and preprocesses the face in the image.
+* Loads the custom CNN model (`custom1.h5`).
+* Runs the inference/prediction.
+
+
+4. **Result Display:** The predicted emotion is returned to the C++ frontend and displayed on the GUI.
+
+---
+
+## 🔹 Model & Architecture Details
+
+* **Architecture:** Custom Convolutional Neural Network (CNN)
+* **Accuracy:** ~75% on the test set
+* **Input Size:** 64x64 grayscale face image
+* **Model File:** `custom1.h5` (Trained Keras model)
+
+---
+
+## 🔹 Preprocessing Techniques
+
+Before the model makes a prediction, the input image undergoes the following automated preprocessing steps via `model.py`:
+
+* **Face Detection:** Locates the face using OpenCV Haar Cascades (`haarcascade_frontalface_default.xml`).
+* **Color Conversion:** Converts the image to grayscale.
+* **Cropping & Resizing:** Isolates the detected face region and resizes it to the required 64x64 resolution.
+* **Normalization:** Scales pixel values appropriately (handled internally by the model if applicable).
+
+*Note: If no face is detected by the Haar Cascade during preprocessing, the program will return an error message.*
+
+---
+
+## 🔹 Notes & Future Enhancements
+
+* **Single Face Processing:** Currently, only one face is processed per image (the program selects the first detected face).
+* **Optimal Conditions:** Predictions are most accurate when the subject's face is clearly visible, well-lit, and front-facing.
+* **Future Work:** Real-world performance can be improved by introducing dataset augmentation and integrating real-time webcam video feeds.
