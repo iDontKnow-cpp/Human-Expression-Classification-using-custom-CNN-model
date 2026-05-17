@@ -89,7 +89,11 @@ Libraries Used:
 - QProcess (used to call Python backend),
 Executable: qt_app (your will get this executable file after compiling the main.cpp),
 To download the C++ libraries, use this command in terminal: sudo apt install qtbase5-dev,
-To compile the main.cpp file, command: g++ -fPIC main.cpp -o qt_app pkg-config --cflags --libs Qt5Widgets
+To compile the main.cpp file, command:
+```bash
+ g++ -fPIC main.cpp -o qt_app pkg-config --cflags --libs Qt5Widgets
+``` 
+
 
 **Usage:**
 1. Clone the repository.
